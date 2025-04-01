@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx-print-ip
 spec:
-  replicas: 4
+  replicas: 10
   selector:
     matchLabels:
       app: nginx-print-ip
