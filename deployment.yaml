@@ -44,13 +44,24 @@ spec:
       targetPort: 80
   type: LoadBalancer
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: ubuntu-test
+  labels:
+    app: ubuntu-test
 spec:
-  containers:
-  - name: ubuntu
-    image: ubuntu
-    command: ["/bin/sh", "-c"]
-    args: ["sleep 3600"]
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu-test
+  template:
+    metadata:
+      labels:
+        app: ubuntu-test
+    spec:
+      containers:
+      - name: ubuntu
+        image: ubuntu
+        command: ["/bin/sh", "-c"]
+        args: ["sleep 3600"]
